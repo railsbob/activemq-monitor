@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+require 'activemq-monitor'
+require 'json'
+
+if ARGV.size < 2
+  STDERR.print "Usage: #{$0} /activemq-monitor 'stomp://username:password@localhost:61313' <queue>\n"
+  exit(1)
+end
+
+monitor = Activemq::Monitor.new(ARGV[0], ARGV[1])
+monitor.start
