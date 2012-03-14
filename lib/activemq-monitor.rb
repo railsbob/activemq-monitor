@@ -5,7 +5,7 @@ require 'json'
 module Activemq
   class Monitor
     def initialize(url, channel)
-      @url = url
+      @url = URI.parse(url)
       @channel = channel
     end
 
@@ -26,7 +26,7 @@ module Activemq
     end
 
     def client
-      @client ||= Stomp::Client.new(@url)
+      @client ||= Stomp::Client.new(@url.user, @url.password, @url.host, @url.port, true)
     end
   end
 end
